@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LINE BOY - Stylish Neon Action Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #050508;
+            --neon-green: #39FF14;
+            --neon-cyan: #00F5FF;
+            --neon-pink: #FF1493;
+            --neon-yellow: #FFFF00;
+            --text-color: #F0F0FF;
+            --shadow-color: rgba(57, 255, 20, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Zen Kaku Gothic New', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            padding: 2rem;
+            background: radial-gradient(circle at center, #111d33 0%, var(--bg-color) 70%);
+        }
+
+        .title-squares {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .square {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            animation: pulse-glow 2s infinite alternate;
+        }
+
+        .sq-1 { background-color: var(--neon-green); box-shadow: 0 0 15px var(--neon-green); }
+        .sq-2 { background-color: var(--neon-pink); box-shadow: 0 0 15px var(--neon-pink); }
+        .sq-3 { background-color: var(--neon-cyan); box-shadow: 0 0 15px var(--neon-cyan); }
+        .sq-4 { background-color: var(--neon-yellow); box-shadow: 0 0 15px var(--neon-yellow); }
+
+        h1 {
+            font-size: 5rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            color: transparent;
+            -webkit-text-stroke: 2px var(--neon-cyan);
+            text-shadow: 0 0 20px rgba(0, 245, 255, 0.5);
+            background: linear-gradient(90deg, var(--neon-green), var(--neon-cyan), var(--neon-pink));
+            -webkit-background-clip: text;
+            animation: gradient-shift 5s linear infinite;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--neon-green);
+            margin-bottom: 3rem;
+            text-shadow: 0 0 10px var(--shadow-color);
+        }
+
+        /* Call To Action Button */
+        .btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--bg-color);
+            background-color: var(--neon-green);
+            border: 2px solid var(--neon-green);
+            border-radius: 30px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(57, 255, 20, 0.5);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--neon-green);
+            box-shadow: 0 0 40px rgba(57, 255, 20, 0.8), inset 0 0 20px rgba(57, 255, 20, 0.4);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            color: var(--neon-pink);
+            text-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2.5rem;
+            border-radius: 16px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-pink));
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.2);
+            border-color: var(--neon-cyan);
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--neon-cyan);
+        }
+
+        .feature-card p {
+            line-height: 1.6;
+            color: #b0c4de;
+        }
+
+        /* Controls Section */
+        .controls {
+            background-color: #080c14;
+            padding: 5rem 2rem;
+        }
+        
+        .controls-inner {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .keys {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .key-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .key-icon {
+            width: 80px;
+            height: 60px;
+            border: 2px solid var(--neon-yellow);
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            color: var(--neon-yellow);
+            margin-bottom: 1rem;
+            box-shadow: 0 0 15px rgba(255, 255, 0, 0.3);
+            text-shadow: 0 0 8px rgba(255, 255, 0, 0.8);
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .screenshot-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s;
+        }
+
+        .screenshot-card:hover {
+            transform: scale(1.03);
+            border-color: var(--neon-cyan);
+            box-shadow: 0 5px 20px rgba(0, 245, 255, 0.3);
+        }
+
+        .screenshot-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            image-rendering: pixelated; /* Keeps pixel art crisp */
+        }
+
+        .screenshot-card figcaption {
+            padding: 1rem;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--neon-yellow);
+            text-shadow: 0 0 5px rgba(255, 255, 0, 0.5);
+            background: #080c14;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--bg-color);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animations */
+        @keyframes pulse-glow {
+            0% { opacity: 0.7; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.1); }
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="title-squares">
+            <div class="square sq-1"></div>
+            <div class="square sq-2"></div>
+            <div class="square sq-3"></div>
+            <div class="square sq-4"></div>
+        </div>
+        <h1>LINE BOY</h1>
+        <h2>ネオンが躍る、極限のアクション。</h2>
+        <a href="lineboy.html" class="btn">PLAY ON WEB</a>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <h2 class="section-title">GAME FEATURES</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>5 UNIQUE WORLDS</h3>
+                <p>Forest, Desert, Cave, Ghost, Volcano。それぞれ異なるネオンカラーに輝く5つのステージを踏破せよ。</p>
+            </div>
+            <div class="feature-card">
+                <h3>EPIC BOSSES</h3>
+                <p>各ステージの最後に待ち受ける巨大なボス。弾幕をかい潜り、上からの踏みつけ攻撃で撃破しろ！</p>
+            </div>
+            <div class="feature-card">
+                <h3>NEON GLOW</h3>
+                <p>完全オリジナルに調整された16色の蛍光パレット。暗闇に光る鮮やかなパーティクル演出がプレイを盛り上げる。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshot Gallery -->
+    <section class="gallery">
+        <h2 class="section-title">SCREENSHOTS</h2>
+        <div class="gallery-grid">
+            <figure class="screenshot-card">
+                <img src="images/title.png" alt="Title Screen">
+                <figcaption>TITLE SCREEN</figcaption>
+            </figure>
+            <figure class="screenshot-card">
+                <img src="images/world1.png" alt="World 1: Forest">
+                <figcaption>WORLD 1: FOREST</figcaption>
+            </figure>
+            <figure class="screenshot-card">
+                <img src="images/world2.png" alt="World 2: Desert">
+                <figcaption>WORLD 2: DESERT</figcaption>
+            </figure>
+            <figure class="screenshot-card">
+                <img src="images/world3.png" alt="World 3: Cave">
+                <figcaption>WORLD 3: CAVE</figcaption>
+            </figure>
+            <figure class="screenshot-card">
+                <img src="images/world4.png" alt="World 4: Ghost">
+                <figcaption>WORLD 4: GHOST</figcaption>
+            </figure>
+            <figure class="screenshot-card">
+                <img src="images/world5.png" alt="World 5: Volcano">
+                <figcaption>WORLD 5: VOLCANO</figcaption>
+            </figure>
+            <figure class="screenshot-card">
+                <img src="images/boss.png" alt="Epic Boss Battle">
+                <figcaption>EPIC BOSS BATTLE</figcaption>
+            </figure>
+        </div>
+    </section>
+
+    <!-- Controls Section -->
+    <section class="controls">
+        <div class="controls-inner">
+            <h2 class="section-title" style="color: var(--neon-yellow); text-shadow: 0 0 15px rgba(255, 255, 0, 0.5);">CONTROLS</h2>
+            <p>直感的な操作で、スピーディなアクションを楽しもう。</p>
+            
+            <div class="keys">
+                <div class="key-box">
+                    <div class="key-icon">← / →</div>
+                    <p>左右移動</p>
+                </div>
+                <div class="key-box">
+                    <div class="key-icon">SPACE</div>
+                    <p>ジャンプ・踏みつけ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 LINE BOY Project. Pyxel Game Engine.</p>
+    </footer>
+
+</body>
+</html>
